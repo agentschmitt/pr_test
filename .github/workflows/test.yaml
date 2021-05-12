@@ -1,0 +1,20 @@
+name: test
+on:
+  create:
+  push:
+  delete:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        echo "${{ github.event_name }}"    
+        echo "${{ github.base_ref }}"
+        echo "${{ github.head_ref }}"
+        echo "${{ github.ref }}"
