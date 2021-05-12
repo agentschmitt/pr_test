@@ -1,12 +1,10 @@
 name: test
 on:
-  create:
-  push:
   delete:
-  workflow_dispatch:
+    tags-ignore: ["**"]
   pull_request:
     types: [closed]
-
+  workflow_dispatch:
 jobs:
   test:
     name: test-pr
