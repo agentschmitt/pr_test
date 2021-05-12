@@ -4,12 +4,20 @@ on:
   delete:
   workflow_dispatch:
 jobs:
-  test:
-    name: test-pr
+  debug:
+    name: debug
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - uses: ludeeus/action-eventdata@master
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "${{ github.event_name }}"
+        echo "${{ github.ref }}"
+    - uses: actions/checkout@v2
     - run: |
         echo "${{ github.event_name }}"
         echo "${{ github.ref }}"
