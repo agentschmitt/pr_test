@@ -4,18 +4,9 @@ on:
   delete:
   workflow_dispatch:
 jobs:
-  debug:
-    name: debug
+  trigger:
+    name: trigger
     runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     steps:
-    - uses: ludeeus/action-eventdata@master
-
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-        echo "${{ github.event_name }}"
-        echo "${{ github.ref }}"
-        echo "${{ github.event.ref_type }}"
-        echo "${{ github.event.ref }}"
+      - run: echo "${{ github.ref }}"
