@@ -1,6 +1,5 @@
 name: test
 on:
-  create:
   delete:
   workflow_dispatch:
 jobs:
