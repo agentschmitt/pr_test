@@ -1,7 +1,9 @@
 name: test
 on:
+  create:
+    branches: ["**", "!main"]
   delete:
-    tags-ignore: ["**"]
+    branches: ["**", "!main"]
   pull_request:
     types: [closed]
   workflow_dispatch:
