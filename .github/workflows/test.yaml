@@ -1,9 +1,11 @@
 name: test
 on:
+  push:
+    branches: ["test"]
   create:
-    branches: ["**", "!main"]
+    branches: ["test"]
   delete:
-    branches: ["**", "!main"]
+    branches: ["test"]
   pull_request:
     types: [closed]
   workflow_dispatch:
