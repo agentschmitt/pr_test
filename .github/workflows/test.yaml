@@ -8,4 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.ref_type != 'tag' }}
     steps:
-      - run: echo "hallo ich bin nur der master"
+      - run: echo "hallo ich bin der master"
+      - run: echo "${{ github.event.ref_type }}"
+      - run: echo "${{ github.ref }}"      
