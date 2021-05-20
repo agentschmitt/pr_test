@@ -9,5 +9,8 @@ jobs:
     if: ${{ github.event.ref_type != 'tag' }}
     steps:
       - run: echo "hallo ich bin der master"
-      - run: echo "${{ github.event.ref_type }}"
-      - run: echo "${{ github.ref }}"      
+      - run: echo event "${{ github.event_name }}"
+      - run: echo event.ref_type "${{ github.event.ref_type }}"
+      - run: echo event.ref"${{ github.event.ref }}"
+      - run: echo ref "${{ github.ref }}"
+      
