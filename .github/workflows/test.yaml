@@ -23,7 +23,7 @@ jobs:
       branch: ${{ steps.version.outputs.branch }}
     steps:
     - run: |
-        if [ "${{ github.event_name }}" -eq "delete" ]; then
+        if [ "${{ github.event_name }}" == "delete" ]; then
           echo "::set-output name=branch::${{ github.event.ref }}" | tr '[:upper:]' '[:lower:]'
         else
           echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
