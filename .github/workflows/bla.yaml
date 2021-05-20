@@ -11,16 +11,22 @@ jobs:
       matrix:
         include:
           - brand: blubb
-            branch: .*
+            branch:
+              - master
+              - test
     steps:
-    #- run: echo "matrix ${{ matrix.brand }} ${{ matrix.branch }}"
-    #- run: echo "branch ${{ github.ref }}"
-    
-    - run: echo "::set-output name=flag::true"
+    - run: |
+        REGEX=$(echo "^${{ matrix.branch }}$" | sed "s/,/\|/g")
+        shopt -s nocasematch
+
+        if [[ "${GITHUB_REF##*/}" =~ $REGEX ]];then
+          echo "::set-output name=flag::true"
+        else
+          echo "::set-output name=flag::false"
+        fi
       id: doit
-    - run: echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
-      id: version
-    - run: echo "${{ steps.version.outputs.branch }}"
-    - run: echo "${{ steps.doit.outputs.flag }}"    
+      name: doit?
+    
     - run: echo "CONDITION MATCHING"
+      name: condition
       if: ${{ steps.doit.outputs.flag == 'true' }}
