@@ -13,7 +13,7 @@ jobs:
       - run: echo event.ref_type "${{ github.event.ref_type }}"
       - run: echo event.ref"${{ github.event.ref }}"
       - run: echo ref "${{ github.ref }}"
-      
+
   version:
     name: version
     runs-on: ubuntu-latest
@@ -23,9 +23,10 @@ jobs:
       branch: ${{ steps.version.outputs.branch }}
     steps:
     - run: |
-        if [ "${{ github.event_name }}" -eq "delete" }} ]; then
-          echo "::set-output name=branch::${{ github.event.ref }}" | tr '[:upper:]' '[:lower:]'
+        if [ "${{ github.event_name }}" -eq "delete" ]; then
+          BRANCH_REF=${{ github.event.ref }};
         else
-          echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
+          BRANCH_REF=${{ github.ref }};
         fi
+        echo "::set-output name=branch::${BRANCH_REF##*/}" | tr '[:upper:]' '[:lower:]'
       id: version
