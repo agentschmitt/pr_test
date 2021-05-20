@@ -23,4 +23,4 @@ jobs:
     - run: echo "${{ steps.version.outputs.branch }}"
     - run: echo "${{ steps.doit.outputs.flag }}"    
     - run: echo "CONDITION MATCHING"
-      if: ${{ steps.doit.outputs.flag == true }}
+      if: ${{ steps.doit.outputs.flag == 'true' }}
