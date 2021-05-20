@@ -16,12 +16,9 @@ jobs:
     #- run: echo "matrix ${{ matrix.brand }} ${{ matrix.branch }}"
     #- run: echo "branch ${{ github.ref }}"
     
-    #- run: echo "::set-output name=flag::true"
-      #id: doit
-    
-    #- run: echo "============ DO IT ${{ steps.doit.outputs.flag }} ============"
-      #if: ${{ steps.doit.outputs.flag == true }}
-
+    - run: echo "::set-output name=flag::true"
+      id: doit
     - run: echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
       id: version
-    - run: echo "${{ steps.version.outputs.branch }}"      
+    - run: echo "${{ steps.version.outputs.branch }}"
+    - run: echo "${{ steps.doit.outputs.flag }}"    
