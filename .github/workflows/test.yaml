@@ -14,3 +14,18 @@ jobs:
       - run: echo event.ref"${{ github.event.ref }}"
       - run: echo ref "${{ github.ref }}"
       
+  version:
+    name: version
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ github.event.ref_type != 'tag' }}
+    outputs:
+      branch: ${{ steps.version.outputs.branch }}
+    steps:
+    - run: |
+        if [ "${{ github.event_name }}" -eq "delete" }} ]; then
+          echo "::set-output name=branch::${{ github.event.ref }}" | tr '[:upper:]' '[:lower:]'
+        else
+          echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
+        fi
+      id: version
