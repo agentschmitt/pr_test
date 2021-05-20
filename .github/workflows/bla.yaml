@@ -16,7 +16,7 @@ jobs:
               - test
     steps:
     - run: |
-        REGEX=$(echo "^${{ matrix.branch }}$" | sed "s/,/\|/g")
+        REGEX=$(echo "^${{ join(matrix.branch, '|') }}$")
         shopt -s nocasematch
 
         if [[ "${GITHUB_REF##*/}" =~ $REGEX ]];then
