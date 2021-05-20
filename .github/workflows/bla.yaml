@@ -1,0 +1,23 @@
+name: bla
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  bla:
+    name: bla
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - brand: blubb
+            branch: .*
+    steps:
+    - run: echo "matrix ${{ matrix.brand }} ${{ matrix.branch }}"
+    - run: echo "branch ${{ github.ref }}"
+    
+    - run: echo "::set-output name=doit::true"
+      id: doit
+    
+    - run: echo "============ DO IT ${{ steps.doit.outputs.doit }} ============"
+      if: ${{ steps.doit.outputs.doit == true }}
