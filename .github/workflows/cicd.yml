@@ -1,0 +1,25 @@
+name: cicd
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - brand: mybrand
+            branch: [master, test]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/setup-helm@v1
+    - uses: chrisdickinson/setup-yq@latest
+    - uses: ./.github/actions/filter_branch
+      id: filter_branch
+      with:
+        branch: ${{ matrix.branch }}
+    - run: echo "HALLO flo ich will deployen"
+      if: ${{ steps.deploy.filter_branch.match == 'true' }}

@@ -1,0 +1,24 @@
+name: filter_branch
+description: filter branches
+inputs:
+  branch:
+    description: list of branches
+    required: true
+outputs:
+  match:
+    description: 'true or false depending on if its matching or not'
+    value: ${{ steps.filter_branch.outputs.match }}
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        REGEX=$(echo "^${{ join(inputs.branch, '|') }}$")
+        shopt -s nocasematch
+
+        if [[ "${GITHUB_REF##*/}" =~ $REGEX ]];then
+          echo "::set-output name=match::true"
+        else
+          echo "::set-output name=match::false"
+        fi
+      id: filter_branch
+      shell: bash
