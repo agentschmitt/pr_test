@@ -1,0 +1,11 @@
+name: hello
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  hello:
+    name: hello
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ./.github/workflows/actions/action1
