@@ -11,9 +11,7 @@ jobs:
       matrix:
         include:
           - brand: blubb
-            branch:
-              - master
-              - test
+            branch: master
     steps:
     - run: |
         REGEX=$(echo "^${{ join(matrix.branch, '|') }}$")
